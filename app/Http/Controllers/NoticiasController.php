@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\NoticiasRequest;
+use App\Models\Noticias;
+
 
 class NoticiasController extends Controller
 {
@@ -11,7 +14,11 @@ class NoticiasController extends Controller
      */
     public function index()
     {
-        return view('noticias.index');
+        $noticias = Noticias::all();
+        
+        return view('noticias.index',[
+            'noticias' => $noticias,
+        ]);
     }
 
     /**
