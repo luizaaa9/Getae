@@ -10,13 +10,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                @foreach ($noticias as $noticia)
-                    <div style="border:1px dashed green;padding:2px">
-                        <p><strong>{{ $noticia->titulo }}</strong></p>
-                        {{ $noticia->conteudo }}
-                        <br>
-                    </div>
-                @endforeach
+                    <x-link-button href="{{ route('noticias.create') }}" style="margin:10px">
+                        Criar notícias
+                    </x-link-button>
+                    @foreach ($noticias as $noticia)
+                        <div>
+                            <p><strong>{{ $noticia->titulo }}</strong></p>
+                            {{ $noticia->conteudo }}
+                            <br>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

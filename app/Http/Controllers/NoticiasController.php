@@ -26,7 +26,7 @@ class NoticiasController extends Controller
      */
     public function create()
     {
-        //
+        return view("noticias.create");
     }
 
     /**
@@ -34,7 +34,8 @@ class NoticiasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Noticias::create($request->all());
+        return redirect()-> route('noticias.index');
     }
 
     /**
