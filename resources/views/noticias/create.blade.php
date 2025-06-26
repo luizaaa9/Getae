@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <form method="POST" action="{{ route('noticias.store') }}">
+                        <form method="POST" action="{{ route('noticias.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <!-- Título -->
@@ -24,6 +24,12 @@
                                 <x-input-label for="conteudo" :value="__('Conteúdo')" />
                                 <x-textarea id="conteudo" class="block mt-1" name="conteudo" required autofocus autocomplete="conteudo">{{ old('conteudo') }}</x-textarea>
                                 <x-input-error :messages="$errors->get('conteudo')" class="mt-2" />
+                            </div>
+
+                            <!-- Imagem -->
+                            <div>
+                                <x-input-label for="imagem" :value="__('Imagem')" />
+                                <input type="file" name="imagem" id="imagem" accept="image/*">
                             </div>
 
                             <x-primary-button class="my-5">

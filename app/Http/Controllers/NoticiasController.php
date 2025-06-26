@@ -12,11 +12,14 @@ class NoticiasController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $noticias = Noticias::all();
         
-        return view('dashboard',[
+        return view('noticias.index',[
             'noticias' => $noticias,
         ]);
     }
@@ -32,11 +35,18 @@ class NoticiasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoticiasRequest $request)
     {
-        Noticias::create($request->all());
+        $dados = $request->validated();
+        if($request->hasFile('imagem')){
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->store('noticias', 'public');
+            $dados['imagem'] = $caminhoImagem;
+        }
+        Noticias::create($dados);
         return redirect()-> route('noticias.index');
     }
+
 
     /**
      * Display the specified resource.

@@ -11,7 +11,7 @@ class NoticiasRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class NoticiasRequest extends FormRequest
             return [
                 'titulo' => 'required|min:3|max:255',
                 'conteudo' => 'required',
+                'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ];
         }
 
