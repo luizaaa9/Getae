@@ -16,7 +16,7 @@ class NoticiasController extends Controller
     {
         $noticias = Noticias::all();
         
-        return view('noticias.index',[
+        return view('dashboard',[
             'noticias' => $noticias,
         ]);
     }
