@@ -10,9 +10,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <x-link-button href="{{ route('noticias.create') }}" style="margin:10px">
-                        Criar notícias
-                    </x-link-button>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <x-link-button href="{{ route('noticias.create') }}" style="margin:10px">
+                                Criar notícias
+                            </x-link-button>
+                        @endif
+                    @endauth
                     @foreach ($noticias as $noticia)
                         <div>
                             <p><strong>{{ $noticia->titulo }}</strong></p>
