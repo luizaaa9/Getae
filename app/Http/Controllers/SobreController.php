@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SobreRequest;
+use App\Models\Sobre;
 use Illuminate\Http\Request;
-use App\Http\Requests\NoticiasRequest;
-use App\Models\Noticias;
 
-
-class NoticiasController extends Controller
+class SobreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $noticias = Noticias::all();
-        
-        return view('noticias.index',[
-            'noticias' => $noticias,
+        $sobreinfo = Sobre::all();
+
+        return view('sobre.index', [
+            'informacao' => $sobreinfo,
         ]);
     }
 
@@ -29,24 +25,23 @@ class NoticiasController extends Controller
      */
     public function create()
     {
-        return view("noticias.create");
+        return view('sobre.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NoticiasRequest $request)
+    public function store(SobreRequest $request)
     {
-        $dados = $request->validated();
+        $informacoes = $request->validated();
         if($request->hasFile('imagem')){
             $imagem = $request->file('imagem');
-            $caminhoImagem = $imagem->store('noticias', 'public');
-            $dados['imagem'] = $caminhoImagem;
+            $caminhoImagem = $imagem->store('sobre', 'public');
+            $informacoes['imagem'] = $caminhoImagem;
         }
-        Noticias::create($dados);
-        return redirect()-> route('noticias.index');
+        Sobre::create($informacoes);
+        return redirect()-> route('sobre.index');
     }
-
 
     /**
      * Display the specified resource.
@@ -75,9 +70,9 @@ class NoticiasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Noticias $noticia)
+    public function destroy(Sobre $sobre)
     {
-        $noticia->delete();
-        return redirect()->route('noticias.index');
+        $sobre->delete();
+        return redirect()->route('sobre.index');
     }
 }

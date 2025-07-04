@@ -4,6 +4,7 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SobreController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,5 +28,7 @@ Route::resource('noticias', NoticiasController::class);
 Route::resource('equipe', EquipeController::class);
 
 Route::resource('contato', ContatoController::class);
+
+Route::resource('sobre', SobreController::class);
 
 require __DIR__.'/auth.php';

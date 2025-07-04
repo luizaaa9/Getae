@@ -26,6 +26,11 @@
                         {{ __('Contato') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('sobre.index')" :active="request()->routeIs('sobre.index')">
+                        {{ __('Sobre') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

@@ -12,25 +12,26 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @auth
                         @if (auth()->user()->isAdmin())
-                            <x-link-button href="{{ route('noticias.create') }}" style="margin:10px">
-                                Criar notícias
+                            <x-link-button href="{{ route('sobre.create') }}" style="margin:10px">
+                                Criar Informação
                             </x-link-button>
                         @endif
                     @endauth
-                    @foreach ($noticias as $noticia)
-                        <div>
-                            <p><strong>{{ $noticia->titulo }}</strong></p>
-                            {{ $noticia->conteudo }}
+                    @foreach ($informacao as $info)
+                        <div  style=" border: 1px solid gray; margin: 10px 0">
                             <br>
-                        </div>
-                        <br>
-                            <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="" style="margin: 0 20px">
-                        <br>
-                        <form action="{{ route('noticias.destroy', $noticia->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Confirma exclusão?')">
+                                <img src="{{ asset('storage/' . $info->imagem) }}" alt="" style="margin: 0 20px; width: 200px;">
+                            <br>
+                            <h2><strong>{{ $info->titulo }}</strong></h2><br>
+                            {{ $info->descricao }}
+                            <br>
+                            <form action="{{ route('sobre.destroy', $info->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Confirma exclusão?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Excluir</button>
-                        </form>
+                            </form>
+                        </div>
+                        
                     @endforeach
                 </div>
             </div>
