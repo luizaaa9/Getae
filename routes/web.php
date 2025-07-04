@@ -24,7 +24,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::resource('noticias', NoticiasController::class);
 
-
 Route::resource('equipe', EquipeController::class);
 
 Route::resource('contato', ContatoController::class);
