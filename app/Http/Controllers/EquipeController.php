@@ -57,15 +57,29 @@ class EquipeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $equipe = Equipe::findOrFail($id);
+        return view('equipe.create', compact('equipe'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EquipeRequest $request, string $id)
     {
-        //
+        $equipe = Equipe::findOrFail($id);
+
+        $dados = $request->validated();
+
+        // Se o usuário enviou uma nova imagem
+        if ($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->store('noticias', 'public');
+            $dados['imagem'] = $caminhoImagem;
+        }
+
+        $equipe->update($dados);
+
+        return redirect()->route('equipe.index')->with('success', 'Equipe atualizada com sucesso!');
     }
 
     /**

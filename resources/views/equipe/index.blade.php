@@ -34,12 +34,20 @@
                                 <br>
                             </div>
                         </div>
-                        <form action="{{ route('equipe.destroy', $membro->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Confirma exclusão?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Excluir</button>
-                        </form>
-                        
+
+                        @auth
+                            @if (auth()->user()->isAdmin())
+                                
+                            <form action="{{ route('equipe.edit', $membro->id) }}" method="GET" style="display:inline">
+                                <button type="submit">Editar</button>
+                            </form>
+                                <form action="{{ route('equipe.destroy', $membro->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Confirma exclusão?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Excluir</button>
+                                </form>
+                            @endif
+                        @endauth
                     @endforeach
                 </div>
             </div>
