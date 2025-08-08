@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EquipeRequest;
 use App\Models\Equipe;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EquipeController extends Controller
@@ -13,10 +14,10 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        $equipe = Equipe::all();
-        
-        return view('equipe.index',[
-            'equipe' => $equipe,
+        $equipe = User::where('role', 'admin')->get();
+
+        return view('equipe.index', [
+            "equipe" => $equipe,
         ]);
     }
 
@@ -56,22 +57,37 @@ class EquipeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $equipe = Equipe::findOrFail($id);
+        return view('equipe.create', compact('equipe'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EquipeRequest $request, string $id)
     {
-        //
+        $equipe = Equipe::findOrFail($id);
+
+        $dados = $request->validated();
+
+        // Se o usuário enviou uma nova imagem
+        if ($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $caminhoImagem = $imagem->store('noticias', 'public');
+            $dados['imagem'] = $caminhoImagem;
+        }
+
+        $equipe->update($dados);
+
+        return redirect()->route('equipe.index')->with('success', 'Equipe atualizada com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Equipe $equipe)
     {
-        //
+        $equipe->delete();
+        return redirect()->route('equipe.index');
     }
 }

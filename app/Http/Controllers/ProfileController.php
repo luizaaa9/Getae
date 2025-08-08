@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,18 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+    public function toggleRole($id)
+    {
+        $user = User::findOrFail($id);
+
+        // Alterna entre admin e user
+        $user->role = $user->role === 'admin' ? 'user' : 'admin';
+        $user->save();
+
+        return redirect()->back()->with('success', 'Função do usuário atualizada com sucesso!');
+    }
+
 
     /**
      * Delete the user's account.
