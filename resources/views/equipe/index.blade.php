@@ -24,16 +24,21 @@
                             <br>
                                 
                             <div>
-                                {{ $membro->nome }}
+                                {{ $membro->name }}
+                                <br>
+                                {{ $membro->email }}
                                 <br>
                                 {{ $membro->turma }}
                                 <br>
                                 {{ $membro->descricao }}
                                 <br>
-                                {{ $membro->contato }}
                             </div>
                         </div>
-                        
+                        <form action="{{ route('equipe.destroy', $membro->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Confirma exclusão?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Excluir</button>
+                        </form>
                         
                     @endforeach
                 </div>

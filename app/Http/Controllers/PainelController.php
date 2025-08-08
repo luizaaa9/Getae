@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EquipeRequest;
-use App\Models\Equipe;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class EquipeController extends Controller
+class PainelController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $equipe = User::where('role', 'admin')->get();
+        $usuarios = User::all();
 
-        return view('equipe.index', [
-            "equipe" => $equipe,
+        return view('painel.index', [
+            "usuarios" => $usuarios,
         ]);
     }
 
@@ -26,22 +24,15 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        return view("equipe.create");
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EquipeRequest $request)
+    public function store(Request $request)
     {
-        $dados = $request->validated();
-        if($request->hasFile('imagem')){
-            $imagem = $request->file('imagem');
-            $caminhoImagem = $imagem->store('noticias', 'public');
-            $dados['imagem'] = $caminhoImagem;
-        }
-        Equipe::create($dados);
-        return redirect()-> route('equipe.index');
+        //
     }
 
     /**
@@ -71,9 +62,8 @@ class EquipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Equipe $equipe)
+    public function destroy(string $id)
     {
-        $equipe->delete();
-        return redirect()->route('equipe.index');
+        //
     }
 }

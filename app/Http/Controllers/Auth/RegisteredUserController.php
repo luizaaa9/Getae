@@ -14,31 +14,32 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+    public function create()
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'],
+            'turma' => ['nullable', 'string', 'max:255'],
+            'descricao' => ['nullable', 'string'],
+            'imagem' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
+
+        $path = $request->file('imagem')->store('imagens', 'public');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'turma' => $request->turma,
+            'descricao' => $request->descricao,
+            'imagem' => $path,
             'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         event(new Registered($user));

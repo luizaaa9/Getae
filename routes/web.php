@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\NoticiasController;
+use App\Http\Controllers\PainelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SobreController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     })->name('admin.dashboard');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('painel', PainelController::class);
+    Route::patch('/profile/{id}/toggle-role', [ProfileController::class, 'toggleRole'])->name('profile.toggleRole');
 });
 
 
