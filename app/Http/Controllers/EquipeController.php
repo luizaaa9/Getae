@@ -90,4 +90,15 @@ class EquipeController extends Controller
         $equipe->delete();
         return redirect()->route('equipe.index');
     }
+
+    public function mudarDescricao(EquipeRequest $request, $id)
+    {
+        $request->validated();
+        $membro = Equipe::find($id);
+
+        $membro->descricao = $request->descricao;
+        $membro->save();
+
+        return redirect()->route('equipe.index');
+    }
 }

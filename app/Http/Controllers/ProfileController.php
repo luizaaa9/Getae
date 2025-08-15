@@ -46,7 +46,9 @@ class ProfileController extends Controller
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
         $user->save();
 
-        return redirect()->back()->with('success', 'Função do usuário atualizada com sucesso!');
+        return view('painel.cargo', [
+            'id' => $user->id,
+        ]);
     }
 
 

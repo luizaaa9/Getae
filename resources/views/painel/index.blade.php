@@ -18,7 +18,7 @@
                                 <div>
                                     {{ $usuario->role }} |
                                     {{ $usuario->name }}
-                                    <form action="{{ route('profile.toggleRole', $usuario->id) }}" method="POST" style="display:inline; margin-left:150px">
+                                    <form action="{{ route('profile.cargo', $usuario->id) }}" method="POST" style="display:inline; margin-left:150px">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-warning">
