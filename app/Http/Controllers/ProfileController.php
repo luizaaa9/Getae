@@ -41,13 +41,16 @@ class ProfileController extends Controller
     public function toggleRole($id)
     {
         $user = User::findOrFail($id);
+        $usuario = User::all();
+
 
         // Alterna entre admin e user
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
         $user->save();
 
-        return view('painel.cargo', [
+        return view('painel.index', [
             'id' => $user->id,
+            'usuarios' => $usuario
         ]);
     }
 

@@ -16,13 +16,13 @@ class NoticiasSeeder extends Seeder
         
         DB::table('noticias')->insert([
             'titulo' => 'Exemplo de nota 2',
-            'conteudos' => 'Exemplo de nota 2',
+            'conteudo' => 'Exemplo de nota 2',
         ]);
 
         DB::table('noticias')->insert([
             
             'titulo' => 'Exemplo de nota 2',
-            'conteudos' => 'Exemplo de nota 2',
+            'conteudo' => 'Exemplo de nota 2',
         ]);
     }
 }

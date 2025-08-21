@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('turma')->nullable();
             $table->text('descricao')->nullable();
-            $table->text('imagem')->nullable();
+            $table->text('imagem');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('user');
