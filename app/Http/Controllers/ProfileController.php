@@ -44,14 +44,10 @@ class ProfileController extends Controller
         $usuario = User::all();
 
 
-        // Alterna entre admin e user
         $user->role = $user->role === 'admin' ? 'user' : 'admin';
         $user->save();
 
-        return view('painel.index', [
-            'id' => $user->id,
-            'usuarios' => $usuario
-        ]);
+        return redirect()->route('painel.index');
     }
 
 

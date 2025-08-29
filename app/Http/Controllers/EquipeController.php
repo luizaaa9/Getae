@@ -14,9 +14,13 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        $equipe = Equipe::all(); // pega todos os membros
-        return view('equipe.index', compact('equipe'));
+        $equipe = User::where('role', 'admin')->get();
+
+        return view('equipe.index', [
+            "equipe" => $equipe,
+        ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -82,8 +86,8 @@ class EquipeController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Equipe $equipe)
-    {        
-    $equipe->delete();
-    return redirect()->route('equipe.index')->with('success', 'Membro excluído com sucesso!');
-}
+    {
+        $equipe->delete();
+        return redirect()->route('equipe.index');
+    }
 }

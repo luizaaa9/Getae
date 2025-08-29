@@ -26,11 +26,11 @@
                                     <h2 class="text-2xl font-bold text-teal-600 dark:text-teal-400 mb-4">
                                         {{ $info->titulo }}
                                     </h2>
-                                    <p class="text-gray-700 dark:text-gray-200 leading-relaxed mb-6">
-                                        {{ $info->descricao }}
-                                    </p>
+                                    <a href="{{ $info->descricao }}" class="text-gray-700 dark:text-gray-200 leading-relaxed mb-6">
+                                        Clique aqui!
+                                    </a>
 
-                                    <div class="flex gap-4">
+                                    <div class="flex gap-4" style="margin-top:20px">
                                         <a href="{{ route('sobre.edit', $info->id) }}" 
                                            class="bg-teal-600 hover:bg-teal-300 text-white px-4 py-2 rounded-lg shadow-md transition">
                                            Editar

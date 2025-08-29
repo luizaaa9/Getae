@@ -48,7 +48,11 @@
             <a href="{{ route('dashboard') }}" class="hover:text-teal-300 transition">Notícias</a>
             <a href="{{ route('equipe.index') }}" class="hover:text-teal-300 transition">Equipe</a>
             <a href="{{ route('sobre.index') }}" class="hover:text-teal-300 transition">Sobre</a>
-            
+            @auth
+                @if (auth()->user()->isAdmin())
+                    <a href="{{ route('painel.index') }}" class="hover:text-teal-300 transition">Painel</a>
+                @endif
+            @endauth
         </div>
     
 </nav>

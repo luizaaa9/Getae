@@ -9,12 +9,11 @@
             @auth
                 @if (auth()->user()->isAdmin())
                     <div class="text-center mb-6">
-    <a href="{{ route('noticias.create') }}" 
-       class=" mb-8 flex-1 text-center px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-semibold">
-        Criar Nova Notícia
-    </a>
-</div>
-
+                        <a href="{{ route('noticias.create') }}" 
+                        class=" mb-8 flex-1 text-center px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition font-semibold">
+                            Criar Nova Notícia
+                        </a>
+                    </div>
                 @endif
             @endauth
 
