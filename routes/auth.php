@@ -35,6 +35,11 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('footer_links', \App\Http\Controllers\FooterLinkController::class);
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');

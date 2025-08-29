@@ -8,6 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SobreController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,4 +36,13 @@ Route::resource('contato', ContatoController::class);
 
 Route::resource('sobre', SobreController::class);
 
+
+Route::get('/noticias/{noticia}/edit', [NoticiasController::class, 'edit'])->name('noticias.edit');
+
+Route::put('/noticias/{noticia}', [NoticiasController::class, 'update'])->name('noticias.update');
+
+Route::post('/noticias', [NoticiasController::class, 'store'])->name('noticias.store');
+
+
 require __DIR__.'/auth.php';
+

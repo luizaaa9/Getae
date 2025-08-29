@@ -59,18 +59,34 @@ class NoticiasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+     public function edit(Noticias $noticia)
+{
+    // Passa a notícia pro formulário
+    return view('noticias.edit', [
+        'noticia' => $noticia,
+    ]);
+}
+
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+   public function update(NoticiasRequest $request, Noticias $noticia)
+{
+    $dados = $request->validated();
+
+    // Atualiza imagem se houver upload novo
+    if($request->hasFile('imagem')){
+        $imagem = $request->file('imagem');
+        $caminhoImagem = $imagem->store('noticias', 'public');
+        $dados['imagem'] = $caminhoImagem;
     }
+
+    $noticia->update($dados);
+
+    return redirect()->route('noticias.index')->with('success', 'Notícia atualizada com sucesso!');
+}
 
     /**
      * Remove the specified resource from storage.
