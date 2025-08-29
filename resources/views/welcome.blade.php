@@ -39,7 +39,6 @@
         </nav>
         @endif
 
-        <!-- Texto central -->
         <div class="text-center max-w-3xl mt-8">
             <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-fade-in-delay-200">
                 GETAE
@@ -50,7 +49,7 @@
             </p>
         </div>
 
-    <!-- Animações Tailwind -->
+
     <style>
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(20px); }
