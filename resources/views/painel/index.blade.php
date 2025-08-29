@@ -15,7 +15,8 @@
                         
                             <h1><strong>Painel de controle</strong></h1>
                             @foreach ($usuarios as $usuario)
-                                <div>
+                                <div style="display:flex">
+                                <img src="{{ asset('storage/' . $usuario->imagem) }}" alt="" style="margin: 0 20px; width:100px;">
                                     {{ $usuario->role }} |
                                     {{ $usuario->name }}
                                     <form action="{{ route('profile.toggleRole', $usuario->id) }}" method="POST" style="display:inline; margin-left:150px">

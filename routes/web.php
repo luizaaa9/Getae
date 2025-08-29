@@ -25,6 +25,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('painel', PainelController::class);
     Route::patch('/profile/{id}/toggle-role', [ProfileController::class, 'toggleRole'])->name('profile.toggleRole');
+
 });
 
 
